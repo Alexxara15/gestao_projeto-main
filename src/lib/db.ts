@@ -5,7 +5,8 @@ const DB_PATH = path.join(process.cwd(), 'data.json');
 
 export type Company = {
     id: string;
-    name: string;
+    name: string; // Used as Nome Fantasia
+    razaoSocial?: string; // Razão Social
     cnpj: string;
     address: string;
     techResp: string;

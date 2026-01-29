@@ -34,9 +34,15 @@ export default function NovaEmpresaPage() {
                 </CardHeader>
                 <CardContent>
                     <form action={formAction} className="space-y-6">
-                        <div className="space-y-2">
-                            <Label htmlFor="name">Nome da Empresa</Label>
-                            <Input id="name" name="name" placeholder="Ex: TechSolutions Engenharia" required />
+                        <div className="space-y-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="razaoSocial">Razão Social</Label>
+                                <Input id="razaoSocial" name="razaoSocial" placeholder="Razão Social Ltda" required />
+                            </div>
+                            <div className="space-y-2">
+                                <Label htmlFor="name">Nome Fantasia (Principal)</Label>
+                                <Input id="name" name="name" placeholder="Ex: TechSolutions Engenharia" required />
+                            </div>
                         </div>
 
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -56,8 +62,8 @@ export default function NovaEmpresaPage() {
                         </div>
 
                         <div className="space-y-2">
-                            <Label htmlFor="techResp">Responsável Técnico</Label>
-                            <Input id="techResp" name="techResp" placeholder="Nome do engenheiro" required />
+                            <Label htmlFor="techResp">Representante da Empresa</Label>
+                            <Input id="techResp" name="techResp" placeholder="Nome do representante legal" required />
                         </div>
 
                         <div className="space-y-2">

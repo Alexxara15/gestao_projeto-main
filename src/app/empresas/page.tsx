@@ -27,9 +27,9 @@ export default async function EmpresasPage() {
                     <Table>
                         <TableHeader>
                             <TableRow>
-                                <TableHead>Nome</TableHead>
+                                <TableHead>Nome Fantasia</TableHead>
                                 <TableHead>CNPJ</TableHead>
-                                <TableHead>Responsável</TableHead>
+                                <TableHead>Representante</TableHead>
                                 <TableHead>Cidade/UF</TableHead>
                                 <TableHead className="text-right">Ações</TableHead>
                             </TableRow>
@@ -37,7 +37,14 @@ export default async function EmpresasPage() {
                         <TableBody>
                             {companies.map((company) => (
                                 <TableRow key={company.id}>
-                                    <TableCell className="font-medium">{company.name}</TableCell>
+                                    <TableCell>
+                                        <div className="flex flex-col">
+                                            <span className="font-medium text-base">{company.name}</span>
+                                            {company.razaoSocial && (
+                                                <span className="text-xs text-muted-foreground">{company.razaoSocial}</span>
+                                            )}
+                                        </div>
+                                    </TableCell>
                                     <TableCell>{company.cnpj}</TableCell>
                                     <TableCell>{company.techResp}</TableCell>
                                     <TableCell>{company.address.split('-').pop()?.trim()}</TableCell>
