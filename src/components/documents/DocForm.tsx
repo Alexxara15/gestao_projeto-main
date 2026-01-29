@@ -63,6 +63,7 @@ export function DocForm({ template, project, company, initialData, onCancel, onS
                 // Attempt Company replacements
                 if (company) {
                     if (value.includes('{{company.name}}')) { value = value.replace('{{company.name}}', company.name); resolved = true; }
+                    if (value.includes('{{company.razaoSocial}}')) { value = value.replace('{{company.razaoSocial}}', company.razaoSocial || company.name); resolved = true; }
                     if (value.includes('{{company.cnpj}}')) { value = value.replace('{{company.cnpj}}', company.cnpj); resolved = true; }
                     if (value.includes('{{company.techResp}}')) { value = value.replace('{{company.techResp}}', company.techResp); resolved = true; }
                     if (value.includes('{{company.email}}')) { value = value.replace('{{company.email}}', company.email); resolved = true; }

@@ -78,6 +78,7 @@ export function GlobalDocProduction({ projects, companies, concessionaires, stat
                         <DocProductionTab
                             project={selectedProject}
                             company={selectedCompany}
+                            companies={companies}
                             concessionaires={concessionaires}
                             states={states}
                             initialDocuments={projectDocs}
