@@ -97,7 +97,54 @@
       ]
     }
   ],
-  "projects": [],
+  "projects": [
+    {
+      "id": "ed98d8ab-36ba-4951-b4fb-190b0ff61e85",
+      "number": "PRJ-2026-289",
+      "companyId": "1",
+      "stateId": "3",
+      "concessionaireId": "3",
+      "city": "Sobral",
+      "infraType": "POSTES",
+      "poleCount": 65,
+      "status": "PREPARATION",
+      "createdAt": "2026-01-29T16:28:36.893Z",
+      "documents": [
+        {
+          "id": "d3952820-49aa-4c06-a690-bff3759781ea",
+          "name": "Solicitação de Compartilhamento",
+          "required": true,
+          "completed": false
+        }
+      ]
+    },
+    {
+      "id": "136a4d50-3338-4b14-86f4-c25c26b6a34a",
+      "number": "PRJ-2026-588",
+      "companyId": "1",
+      "stateId": "5",
+      "concessionaireId": "102",
+      "city": "Teresina",
+      "infraType": "POSTES",
+      "poleCount": 150,
+      "status": "SENT",
+      "createdAt": "2026-01-29T16:30:16.655Z",
+      "documents": [
+        {
+          "id": "ca56ead5-543e-4dbb-bfef-4fdc30e1f827",
+          "name": "Solicitação de Compartilhamento",
+          "required": true,
+          "completed": false
+        },
+        {
+          "id": "e877d817-12a0-480f-9ffe-1a9ff8636263",
+          "name": "Procuração",
+          "required": true,
+          "completed": false
+        }
+      ]
+    }
+  ],
   "generatedDocuments": [
     {
       "id": "d4830ee4-e3b8-4949-b1e5-72fe7e613450",
