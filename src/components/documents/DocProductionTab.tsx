@@ -12,8 +12,8 @@ import { ArrowLeft } from "lucide-react";
 interface DocProductionTabProps {
     project?: Project | null;
     company?: Company | null;
-    concessionaires: { id: string, name: string }[];
-    states: { id: string, name: string }[];
+    concessionaires: { id: string, name: string, stateId?: string }[];
+    states: { id: string, name: string, uf: string }[];
     initialDocuments: GeneratedDocument[];
     docToEdit?: GeneratedDocument | null;
     onExit?: () => void;

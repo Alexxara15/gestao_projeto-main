@@ -12,8 +12,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 interface GlobalDocProductionProps {
     projects: Project[];
     companies: Company[];
-    concessionaires: { id: string, name: string }[];
-    states: { id: string, name: string }[];
+    concessionaires: { id: string, name: string, stateId?: string }[];
+    states: { id: string, name: string, uf: string }[];
     allGeneratedDocuments: GeneratedDocument[];
 }
 
