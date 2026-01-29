@@ -1,0 +1,189 @@
+﻿
+> gestao-infra@0.1.0 lint
+> eslint
+
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\_actions\company-actions.ts
+  17:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\_actions\config-actions.ts
+    3:14  warning  'State' is defined but never used           @typescript-eslint/no-unused-vars
+    3:21  warning  'Concessionaire' is defined but never used  @typescript-eslint/no-unused-vars
+   13:43  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+   39:52  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+   66:61  error    Unexpected any. Specify a different type    @typescript-eslint/no-explicit-any
+  102:44  warning  'id' is defined but never used              @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\_actions\doc-actions.ts
+   28:133  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   60:53   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  163:21   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  168:49   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  171:80   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\_actions\project-actions.ts
+  17:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\configuracoes\concessionarias\page.tsx
+  12:11  warning  'getUf' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\configuracoes\estados\page.tsx
+  2:52  warning  'CardDescription' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\configuracoes\page.tsx
+  4:20  warning  'FileText' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\empresas\novo\page.tsx
+  17:5  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\app\projetos\page.tsx
+  59:63  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\admin\ConcessionaireForm.tsx
+  10:10  warning  'useEffect' is defined but never used                                                                                @typescript-eslint/no-unused-vars
+  10:21  warning  'useState' is defined but never used                                                                                 @typescript-eslint/no-unused-vars
+  32:5   error    Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\admin\StateForm.tsx
+  14:5  error  Use "@ts-expect-error" instead of "@ts-ignore", as "@ts-ignore" will do nothing if the following line is error-free  @typescript-eslint/ban-ts-comment
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocForm.tsx
+   17:34   error    Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+   69:129  warning  'resolved' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  114:25   error    Unexpected any. Specify a different type       @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocHistory.tsx
+  4:10  warning  'Card' is defined but never used         @typescript-eslint/no-unused-vars
+  4:16  warning  'CardContent' is defined but never used  @typescript-eslint/no-unused-vars
+  6:10  warning  'FileText' is defined but never used     @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx
+   8:10  warning  'DocHistory' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  22:79  warning  'initialDocuments' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    @typescript-eslint/no-unused-vars
+  30:44  error    A `require()` style import is forbidden                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-require-imports
+  34:17  error    Error: Cannot access variable before it is declared
+
+`setSelectedTemplate` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx:34:17
+  32 |
+  33 |             if (template) {
+> 34 |                 setSelectedTemplate(template);
+     |                 ^^^^^^^^^^^^^^^^^^^ `setSelectedTemplate` accessed before it is declared
+  35 |                 setInitialFormData(docToEdit.data);
+  36 |                 setView('form');
+  37 |                 setLastEditedId(docToEdit.id);
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx:44:30
+  42 |     // View state: 'selector' | 'form'
+  43 |     const [view, setView] = useState<'selector' | 'form'>('selector');
+> 44 |     const [selectedTemplate, setSelectedTemplate] = useState<DocumentTemplate | null>(null);
+     |                              ^^^^^^^^^^^^^^^^^^^ `setSelectedTemplate` is declared here
+  45 |
+  46 |     const [initialFormData, setInitialFormData] = useState<Record<string, any>>({});
+  47 |      react-hooks/immutability
+  35:17  error    Error: Cannot access variable before it is declared
+
+`setInitialFormData` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx:35:17
+  33 |             if (template) {
+  34 |                 setSelectedTemplate(template);
+> 35 |                 setInitialFormData(docToEdit.data);
+     |                 ^^^^^^^^^^^^^^^^^^ `setInitialFormData` accessed before it is declared
+  36 |                 setView('form');
+  37 |                 setLastEditedId(docToEdit.id);
+  38 |             }
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx:46:29
+  44 |     const [selectedTemplate, setSelectedTemplate] = useState<DocumentTemplate | null>(null);
+  45 |
+> 46 |     const [initialFormData, setInitialFormData] = useState<Record<string, any>>({});
+     |                             ^^^^^^^^^^^^^^^^^^ `setInitialFormData` is declared here
+  47 |
+  48 |     const handleSelectTemplate = (template: DocumentTemplate) => {
+  49 |         setSelectedTemplate(template);  react-hooks/immutability
+  36:17  error    Error: Cannot access variable before it is declared
+
+`setView` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx:36:17
+  34 |                 setSelectedTemplate(template);
+  35 |                 setInitialFormData(docToEdit.data);
+> 36 |                 setView('form');
+     |                 ^^^^^^^ `setView` accessed before it is declared
+  37 |                 setLastEditedId(docToEdit.id);
+  38 |             }
+  39 |         }
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocProductionTab.tsx:43:18
+  41 |
+  42 |     // View state: 'selector' | 'form'
+> 43 |     const [view, setView] = useState<'selector' | 'form'>('selector');
+     |                  ^^^^^^^ `setView` is declared here
+  44 |     const [selectedTemplate, setSelectedTemplate] = useState<DocumentTemplate | null>(null);
+  45 |
+  46 |     const [initialFormData, setInitialFormData] = useState<Record<string, any>>({});                                                                                  react-hooks/immutability
+  46:75  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocSelector.tsx
+  15:31  warning  'concessionaires' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  15:48  warning  'states' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            @typescript-eslint/no-unused-vars
+  17:26  warning  'setSelectedConc' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          @typescript-eslint/no-unused-vars
+  18:27  warning  'setSelectedState' is assigned a value but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+  24:13  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\DocSelector.tsx:24:13
+  22 |         if (selectedConc && selectedState) {
+  23 |             const temps = getTemplates(selectedConc, selectedState);
+> 24 |             setAvailableTemplates(temps);
+     |             ^^^^^^^^^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  25 |         } else {
+  26 |             setAvailableTemplates([]);
+  27 |         }  react-hooks/set-state-in-effect
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\documents\GlobalDocProduction.tsx
+  9:10  warning  'ArrowLeft' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\kanban\KanbanBoard.tsx
+  19:10  warning  'KanbanCard' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\kanban\KanbanCard.tsx
+   5:29  warning  'CardHeader' is defined but never used    @typescript-eslint/no-unused-vars
+   5:41  warning  'CardTitle' is defined but never used     @typescript-eslint/no-unused-vars
+  31:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  32:22  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\layout\MobileSidebar.tsx
+  14:9  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\layout\MobileSidebar.tsx:14:9
+  12 |
+  13 |     useEffect(() => {
+> 14 |         setIsMounted(true);
+     |         ^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  15 |     }, []);
+  16 |
+  17 |     if (!isMounted) {  react-hooks/set-state-in-effect
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\components\layout\Sidebar.tsx
+  15:11  error  An interface declaring no members is equivalent to its supertype  @typescript-eslint/no-empty-object-type
+
+C:\Users\Agil Engenharia\Desktop\teste antigravity\gestao_projeto-main\src\lib\db.ts
+  53:26  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  93:18  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+Ô£û 50 problems (27 errors, 23 warnings)
+

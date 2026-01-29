@@ -1,0 +1,152 @@
+{
+  "companies": [
+    {
+      "id": "1",
+      "name": "Exemplo Engenharia",
+      "cnpj": "00.000.000/0001-91",
+      "address": "Rua Teste, 123",
+      "techResp": "Eng. Fulano",
+      "email": "contato@exemplo.com",
+      "phone": "(11) 99999-9999"
+    }
+  ],
+  "states": [
+    {
+      "id": "1",
+      "name": "São Paulo",
+      "uf": "SP"
+    },
+    {
+      "id": "2",
+      "name": "Rio de Janeiro",
+      "uf": "RJ"
+    },
+    {
+      "id": "3",
+      "name": "Minas Gerais",
+      "uf": "MG"
+    }
+  ],
+  "concessionaires": [
+    {
+      "id": "1",
+      "name": "Enel SP",
+      "stateId": "1",
+      "requiredDocs": [
+        "Requerimento Padrão",
+        "Projeto Técnico (DWG/PDF)",
+        "ART de Projeto e Execução",
+        "Memorial Descritivo",
+        "Cronograma Físico-Financeiro"
+      ]
+    },
+    {
+      "id": "2",
+      "name": "CPFL",
+      "stateId": "1",
+      "requiredDocs": [
+        "Carta de Solicitação",
+        "Projeto Elétrico",
+        "ART",
+        "Licença Ambiental Simplificada"
+      ]
+    },
+    {
+      "id": "3",
+      "name": "Light",
+      "stateId": "2",
+      "requiredDocs": [
+        "Formulário de Acesso",
+        "Diagrama Unifilar",
+        "Responsabilidade Técnica"
+      ]
+    }
+  ],
+  "projects": [],
+  "generatedDocuments": [
+    {
+      "id": "ba8b73db-2531-4a8a-a985-2ad0e47e1ae9",
+      "projectId": null,
+      "templateId": "enel-ce-solicitacao-01",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "2026-01-29",
+        "municipio": "Sobral",
+        "representante_nome": "Alexsandro Araujo",
+        "representante_cargo": "Sócio/Administrador",
+        "empresa_razao_social": "ALANNET LTDA",
+        "empresa_cnpj": "253152240000113",
+        "email_contato": "alo@gmail.com",
+        "endereco_correspondencia": "qualquer rua 35, centro sobral"
+      },
+      "createdAt": "2026-01-29T11:33:54.562Z",
+      "version": 1,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/ENEL_CE_Doc_ALANNETLTDA_v1_20260129.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "16ae07b8-b177-4282-b9bf-ca782dca7cde",
+      "projectId": null,
+      "templateId": "enel-ce-solicitacao-01",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "2026-01-29",
+        "municipio": "Sobral",
+        "representante_nome": "Francisco Alexsandro Araujo",
+        "email_contato": "alexsandro.araujo015@gmail.com",
+        "endereco_correspondencia": "R Cel Estanislau Frota 340",
+        "empresa_cnpj": "00.000.000/0000-01",
+        "empresa_razao_social": "ALEXNET LTDA",
+        "representante_cargo": "SOCIO ADM"
+      },
+      "createdAt": "2026-01-29T11:44:49.560Z",
+      "version": 2,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/ENEL_CE_Doc_ALEXNETLTDA_v2_20260129.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "e80f4d60-8dbe-47e8-b6be-1430ebd85e14",
+      "projectId": null,
+      "templateId": "enel-ce-solicitacao-01",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "2026-01-29",
+        "municipio": "Sobral",
+        "representante_nome": "Francisco Alexsandro Araujo",
+        "email_contato": "alexsandro.araujo015@gmail.com",
+        "endereco_correspondencia": "R Cel Estanislau Frota 340",
+        "representante_cargo": "SOCIO ADM",
+        "empresa_razao_social": "ALEXNET LTDA",
+        "empresa_cnpj": "00.000.000/0000-01"
+      },
+      "createdAt": "2026-01-29T12:02:52.559Z",
+      "version": 3,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/ENEL_CE_Doc_ALEXNETLTDA_v3_20260129.pdf",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "dc6254a5-6070-4d1c-ae6f-c07844636750",
+      "projectId": null,
+      "templateId": "enel-ce-solicitacao-01",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "2026-01-29",
+        "municipio": "Sobral",
+        "representante_nome": "Francisco Alexsandro Araujo",
+        "email_contato": "alexsandro.araujo015@gmail.com",
+        "endereco_correspondencia": "R Cel Estanislau Frota 340",
+        "representante_cargo": "SOCIO ADM",
+        "empresa_razao_social": "ALEXNET LTDA",
+        "empresa_cnpj": "00.000.000/0000-01"
+      },
+      "createdAt": "2026-01-29T12:09:35.379Z",
+      "version": 4,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/ENEL_CE_Doc_ALEXNETLTDA_v4_20260129.docx",
+      "context": "STANDALONE"
+    }
+  ]
+}
