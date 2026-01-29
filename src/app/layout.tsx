@@ -7,7 +7,7 @@ import { Header } from "@/components/layout/Header";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Gestão de Infraestrutura",
+  title: "PRODOC POSTES",
   description: "Sistema de gestão de projetos de compartilhamento de infraestrutura",
 };
 

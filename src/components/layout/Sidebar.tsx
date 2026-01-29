@@ -58,7 +58,7 @@ export function Sidebar({ className }: SidebarProps) {
                         <div className="bg-white w-8 h-8 rounded-full flex items-center justify-center font-bold text-black">P</div>
                     </div>
                     <h1 className="text-2xl font-bold">
-                        Gestão Infra
+                        PRODOC POSTES
                     </h1>
                 </Link>
                 <div className="space-y-1">
@@ -79,18 +79,7 @@ export function Sidebar({ className }: SidebarProps) {
                     ))}
                 </div>
             </div>
-            <div className="px-3">
-                <div className="bg-slate-800 rounded-lg p-4">
-                    <p className="text-xs text-slate-400 mb-2">Usuário</p>
-                    <div className="flex items-center gap-2">
-                        <div className="w-8 h-8 bg-slate-600 rounded-full flex items-center justify-center text-xs">US</div>
-                        <div>
-                            <p className="text-sm font-medium">Eng. Responsável</p>
-                            <p className="text-xs text-slate-400">Admin</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {/* User profile section removed */}
         </div>
     );
 }
