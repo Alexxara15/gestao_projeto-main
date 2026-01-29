@@ -185,15 +185,18 @@ export async function generateDocument(projectId: string | null, templateId: str
             const uf = preparedData['estado_uf'] || 'UF';
             // Sanitize UF just in case
             const safeUf = uf.replace(/[^a-zA-Z]/g, '').toUpperCase();
-            
+
             // We use underscores to separate version to keep it clean
             fileName = `Procuracao_Equatorial_${safeUf}_v${version}.docx`;
+        } else if (templateId.includes('enel-ce-solicitacao')) {
+            // Requested format: Solicitação_de_Compartilhamento
+            fileName = 'Solicitação_de_Compartilhamento.docx';
         } else {
-            // Standard Naming
+            // Standard Naming fallback
             const companyName = formData['empresa_razao_social'] || formData['nome_razao_social'] || 'AVULSO';
             const safeCompanyName = companyName.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().substring(0, 15);
             const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, '');
-            fileName = `ENEL_CE_Doc_${safeCompanyName}_v${version}_${dateStr}.docx`;
+            fileName = `Doc_${safeCompanyName}_v${version}_${dateStr}.docx`;
         }
 
         // Ensure directory exists
