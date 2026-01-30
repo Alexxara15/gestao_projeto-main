@@ -137,7 +137,7 @@
       "city": "Carnaubal",
       "infraType": "POSTES",
       "poleCount": 100,
-      "status": "SENT",
+      "status": "PREPARATION",
       "createdAt": "2026-01-29T17:25:34.459Z",
       "documents": [
         {
