@@ -44,6 +44,6 @@ export async function createCompany(prevState: any, formData: FormData) {
     };
 
     await db.addCompany(newCompany);
-    revalidatePath('/empresas');
+    revalidatePath('/', 'layout');
     redirect('/empresas');
 }

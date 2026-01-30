@@ -28,6 +28,16 @@
       "techResp": "JOSE ERIVALDO DA SILVA",
       "email": "netpoint.mcz.2025@hotmail.com",
       "phone": "(82) 9609-5615"
+    },
+    {
+      "id": "adde6964-4600-4f0a-a35b-87b9c8d79841",
+      "name": "INFORLAN",
+      "razaoSocial": "SISTEMA INFOR-LAN TELECOMUNICAÇÕES LTDA",
+      "cnpj": "52.629.625/0001-10",
+      "address": "Q QUADRA 1, 08, PLANALTO DE MONTESERRA THE, Parnaíba/PI, CEP: 64.207-470",
+      "techResp": "MARCIA MARIA MENDES COSTA",
+      "email": "sistemainforlan@gmail.com",
+      "phone": "(86) 9428-1942"
     }
   ],
   "states": [
@@ -337,6 +347,54 @@
       "createdBy": "Usuário Demo",
       "fileUrl": "/generated-docs/NT.00016.EQTL-03-ANEXO-III-NT.016.EQTL-Termo-de-Solicitacao-de-Compartilhamento.docx",
       "context": "PROJECT"
+    },
+    {
+      "id": "4a902d22-aaa6-4241-bb8b-05393b519e80",
+      "projectId": null,
+      "templateId": "equatorial-solicitacao-102",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "30 de janeiro de 2026",
+        "nome_razao_social": "SISTEMA INFOR-LAN TELECOMUNICAÇÕES LTDA",
+        "empresa_cnpj": "52.629.625/0001-10",
+        "empresa_endereco": "Q QUADRA 1, 08, PLANALTO DE MONTESERRA THE, Parnaíba/PI, CEP: 64.207-470",
+        "empresa_representante": "MARCIA MARIA MENDES COSTA",
+        "empresa_email": "sistemainforlan@gmail.com",
+        "municipio": "Parnaiba",
+        "nome_fantasia": "INFORLAN",
+        "empresa_cargo": "Sócia-Administradora",
+        "empresa_contato": "(86) 9428-1942",
+        "estado_nome": "Piauí",
+        "estado_uf": "PI",
+        "concessionaria_nome": "EQUATORIAL PIAUÍ"
+      },
+      "createdAt": "2026-01-30T11:58:40.400Z",
+      "version": 3,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/NT.00016.EQTL-03-ANEXO-III-NT.016.EQTL-Termo-de-Solicitacao-de-Compartilhamento.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "994200f6-5f67-45ad-b371-14a86b450f4b",
+      "projectId": null,
+      "templateId": "equatorial-procuracao-102",
+      "templateName": "Procuração",
+      "data": {
+        "nome_razao_social": "SISTEMA INFOR-LAN TELECOMUNICAÇÕES LTDA",
+        "nome_endereco": "Q QUADRA 1, 08, PLANALTO DE MONTESERRA THE, Parnaíba/PI, CEP: 64.207-470",
+        "empresa_cnpj": "52.629.625/0001-10",
+        "empresa_representante": "MARCIA MARIA MENDES COSTA",
+        "data_documento": "30 de janeiro de 2026",
+        "texto_representante": "MARCIA MARIA MENDES COSTA, BRASILEIRA , SOLTEIRA, empresaria, nascido(a) em 11/03/1981, n° do CPF\n009.552.033-33, residente e domiciliada na cidade de Parnaíba - PI, na QUADRA F-4, nº 8, QUADRA 1;, Planalto de\nMonteserra The, CEP: 64207-470",
+        "estado_nome": "Piauí",
+        "estado_uf": "PI",
+        "concessionaria_nome": "EQUATORIAL PIAUÍ"
+      },
+      "createdAt": "2026-01-30T11:59:18.218Z",
+      "version": 1,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/Procuracao_Equatorial_PI_v1.docx",
+      "context": "STANDALONE"
     }
   ]
 }

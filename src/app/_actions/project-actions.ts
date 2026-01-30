@@ -55,8 +55,7 @@ export async function createProject(prevState: any, formData: FormData) {
     };
 
     await db.addProject(newProject);
-    revalidatePath('/projetos');
-    revalidatePath('/dashboard');
+    revalidatePath('/', 'layout');
     redirect('/projetos');
 }
 
