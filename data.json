@@ -48,6 +48,26 @@
       "techResp": "Carlos Odeon dos Santos Sousa",
       "email": "CARLOS16SNI@HOTMAIL.COM",
       "phone": "(99) 8430-1702"
+    },
+    {
+      "id": "f68b6a9b-1b5c-4540-9bc9-dcfa03224eeb",
+      "name": "VIRTEX TELECOM",
+      "razaoSocial": "VIRTEX TELECOM LTDA",
+      "cnpj": " 05.439.562/0001-50",
+      "address": "Rua Francisco Prota, 138, Centro, Picos - PI, CEP: 64.600-026",
+      "techResp": "HIRAN LAVOR NERI",
+      "email": "contabilidade@virtex.com.br",
+      "phone": "(89) 3422-3902"
+    },
+    {
+      "id": "48b0e90a-92f2-4bc6-8807-74f2dc1452f3",
+      "name": "NOVA NET SA",
+      "razaoSocial": "NOVA NET SA SERVICOS DE TELECOMUNICACOES LTDA",
+      "cnpj": "51.901.921/0001-66",
+      "address": "Tv. Rui Barbosa 525, Reduto, Belém/PA, CEP: 68.509-650",
+      "techResp": "SALOMAO DOS SANTOS MATOS",
+      "email": "smmattos1004@gmail.com",
+      "phone": "(91) 9257-9462"
     }
   ],
   "states": [
@@ -452,6 +472,124 @@
       "version": 1,
       "createdBy": "Usuário Demo",
       "fileUrl": "/generated-docs/Procuracao_Equatorial_MA_v1.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "db5f59d7-d47c-4f7b-9a0f-8582650e2f56",
+      "projectId": null,
+      "templateId": "equatorial-procuracao-104",
+      "templateName": "Procuração",
+      "data": {
+        "nome_razao_social": "JOSE E DA SILVA NET-POINT LTDA",
+        "nome_endereco": "R PAULO HENRIQUE MENDES, S/N, CASA 09E, TABULEIRO DO MARTINS, MACEIO - AL, CEP: 57.081-520",
+        "empresa_cnpj": "63.520.002/0001-21",
+        "empresa_representante": "JOSE ERIVALDO DA SILVA",
+        "data_documento": "12 de fevereiro de 2026",
+        "texto_representante": "brasileiro, solteiro, empresário, nascido(a) em 27/04/1980, n° do CPF 043.731.534-77, residente e domiciliado na cidade de Maceió - AL, na RUA Paulo Henrique Mendes, nº 9, LETRA E,Tabuleiro do Martins, CEP: 57081-520",
+        "estado_nome": "Alagoas",
+        "estado_uf": "AL",
+        "concessionaria_nome": "EQUATORIAL ALAGOAS"
+      },
+      "createdAt": "2026-02-12T14:47:08.361Z",
+      "version": 1,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/Procuracao_Equatorial_AL_v1.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "a1a5fdd1-3ed8-40cd-8b34-e5a56e5e9e30",
+      "projectId": null,
+      "templateId": "equatorial-solicitacao-102",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "19 de fevereiro de 2026",
+        "nome_razao_social": "VIRTEX TELECOM LTDA",
+        "empresa_cnpj": "05.439.562/0001-50",
+        "empresa_endereco": "Rua Francisco Prota, 138, Centro, Picos - PI, CEP: 64.600-026",
+        "empresa_representante": "HIRAN LAVOR NERI",
+        "empresa_email": "contabilidade@virtex.com.br",
+        "municipio": "Cristino Castro",
+        "nome_fantasia": "VIRTEX TELECOM",
+        "empresa_cargo": "Sócio-Administrador",
+        "empresa_contato": "(89) 3422-3902",
+        "estado_nome": "Piauí",
+        "estado_uf": "PI",
+        "concessionaria_nome": "EQUATORIAL PIAUÍ"
+      },
+      "createdAt": "2026-02-19T18:16:53.816Z",
+      "version": 4,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/NT.00016.EQTL-03-ANEXO-III-NT.016.EQTL-Termo-de-Solicitacao-de-Compartilhamento.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "c4c6aff3-e969-4394-b71e-f247be5173f6",
+      "projectId": null,
+      "templateId": "equatorial-procuracao-102",
+      "templateName": "Procuração",
+      "data": {
+        "nome_razao_social": "VIRTEX TELECOM LTDA",
+        "nome_endereco": "Rua Francisco Prota, 138, Centro, Picos - PI, CEP: 64.600-026",
+        "empresa_cnpj": "05.439.562/0001-50",
+        "empresa_representante": "HIRAN LAVOR NERI",
+        "data_documento": "19 de fevereiro de 2026",
+        "texto_representante": "HIRAN LAVOR NERI, brasileiro, inscrito no CPF:\n428.503.983-49, portador da cédula de identidade nº 979.268 SSP-PI, residente na Rua Marcos\nParente, 2152, Canto da Várzea, Picos-PI, CEP: 64600-154.",
+        "estado_nome": "Piauí",
+        "estado_uf": "PI",
+        "concessionaria_nome": "EQUATORIAL PIAUÍ"
+      },
+      "createdAt": "2026-02-19T18:19:07.648Z",
+      "version": 2,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/Procuracao_Equatorial_PI_v2.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "00cfa04c-fa94-4a66-9d2e-1c6a63293750",
+      "projectId": null,
+      "templateId": "equatorial-solicitacao-105",
+      "templateName": "Solicitação de Compartilhamento",
+      "data": {
+        "data_documento": "23 de fevereiro de 2026",
+        "nome_razao_social": "NOVA NET SA SERVICOS DE TELECOMUNICACOES LTDA",
+        "empresa_cnpj": "51.901.921/0001-66",
+        "empresa_endereco": "Tv. Rui Barbosa 525, Reduto, Belém/PA, CEP: 68.509-650",
+        "empresa_representante": "SALOMAO DOS SANTOS MATOS",
+        "empresa_email": "smmattos1004@gmail.com",
+        "municipio": "Belém",
+        "nome_fantasia": "NOVA NET SA",
+        "empresa_cargo": "Sócio/Administrador",
+        "empresa_contato": "(91) 9257-9462",
+        "estado_nome": "Pará",
+        "estado_uf": "PA",
+        "concessionaria_nome": "EQUATORIAL PARÁ"
+      },
+      "createdAt": "2026-02-23T12:26:15.584Z",
+      "version": 1,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/NT.00016.EQTL-03-ANEXO-III-NT.016.EQTL-Termo-de-Solicitacao-de-Compartilhamento.docx",
+      "context": "STANDALONE"
+    },
+    {
+      "id": "d1d978d3-6349-4b9e-a36f-5ae513294e71",
+      "projectId": null,
+      "templateId": "equatorial-procuracao-105",
+      "templateName": "Procuração",
+      "data": {
+        "nome_razao_social": "NOVA NET SA SERVICOS DE TELECOMUNICACOES LTDA",
+        "nome_endereco": "Tv. Rui Barbosa 525, Reduto, Belém/PA, CEP: 68.509-650",
+        "empresa_cnpj": "51.901.921/0001-66",
+        "empresa_representante": "SALOMAO DOS SANTOS MATOS",
+        "data_documento": "23 de fevereiro de 2026",
+        "texto_representante": "SALOMAO DOS SANTOS MATOS,\nbrasileiro, inscrito no CPF: 000.555.392-03, portador da cédula de identidade nº 6036064 PPAC - PA,\nresidente na RUA DA PAZ, 35, Q JN, TERRA FIRME, BELÉM - PA, CEP: 66079016",
+        "estado_nome": "Pará",
+        "estado_uf": "PA",
+        "concessionaria_nome": "EQUATORIAL PARÁ"
+      },
+      "createdAt": "2026-02-23T12:26:36.947Z",
+      "version": 1,
+      "createdBy": "Usuário Demo",
+      "fileUrl": "/generated-docs/Procuracao_Equatorial_PA_v1.docx",
       "context": "STANDALONE"
     }
   ]
