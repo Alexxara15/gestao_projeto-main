@@ -16,11 +16,15 @@ const formSchema = z.object({
 });
 
 export async function createCompany(prevState: any, formData: FormData) {
+    const addressLine = formData.get('address') as string || '';
+    const city = formData.get('city') as string || '';
+    const fullAddress = city ? `${addressLine}, ${city} - CE` : addressLine;
+
     const rawData = {
         name: formData.get('name'),
         razaoSocial: formData.get('razaoSocial'),
         cnpj: formData.get('cnpj'),
-        address: formData.get('address'),
+        address: fullAddress,
         techResp: formData.get('techResp'),
         email: formData.get('email'),
         phone: formData.get('phone'),

@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter }
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { CityCombobox } from "@/components/ui/city-combobox";
 import { ArrowLeft, ArrowRight, Check, FileText } from "lucide-react";
 import Link from "next/link";
 import { createProject } from "@/app/_actions/project-actions";
@@ -145,12 +146,11 @@ export function ProjectWizardForm({ companies, states, concessionaires }: Projec
                                             </SelectContent>
                                         </Select>
                                     </div>
-                                    <div className="space-y-2">
+                                    <div className="space-y-2 flex flex-col">
                                         <Label>Cidade</Label>
-                                        <Input
-                                            placeholder="Digite a cidade"
+                                        <CityCombobox 
                                             value={formData.city}
-                                            onChange={(e) => updateField('city', e.target.value)}
+                                            onChange={(value) => updateField('city', value)}
                                         />
                                     </div>
                                 </div>

@@ -8,14 +8,16 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { createCompany } from "@/app/_actions/company-actions";
+import { useState } from "react";
+import { CityCombobox } from "@/components/ui/city-combobox";
 
 const initialState = {
     message: '',
 };
 
 export default function NovaEmpresaPage() {
-    // @ts-ignore
     const [state, formAction] = useFormState(createCompany, initialState);
+    const [city, setCity] = useState("");
 
     return (
         <div className="space-y-6 max-w-2xl mx-auto">
@@ -66,9 +68,19 @@ export default function NovaEmpresaPage() {
                             <Input id="techResp" name="techResp" placeholder="Nome do representante legal" required />
                         </div>
 
-                        <div className="space-y-2">
-                            <Label htmlFor="address">Endereço Completo</Label>
-                            <Input id="address" name="address" placeholder="Rua, número, bairro, cidade - UF" required />
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div className="space-y-2">
+                                <Label htmlFor="address">Logradouro, Número, Bairro</Label>
+                                <Input id="address" name="address" placeholder="Ex: Rua A, 123, Centro" required />
+                            </div>
+                            <div className="space-y-2 flex flex-col">
+                                <Label>Cidade</Label>
+                                <CityCombobox 
+                                    value={city}
+                                    onChange={setCity}
+                                />
+                                <input type="hidden" name="city" value={city} />
+                            </div>
                         </div>
 
                         {state?.message && (
