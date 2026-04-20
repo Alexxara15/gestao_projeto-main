@@ -101,6 +101,10 @@ export function DocForm({ template, project, company, initialData, onCancel, onS
         try {
             const result = await generateDocument(project?.id || null, template.id, template.name, formData);
 
+            if (result && !result.success) {
+                throw new Error(result.error || "Unknown server error");
+            }
+
             // Auto-download
             if (result && result.document && result.document.fileUrl) {
                 const link = document.createElement('a');

@@ -45,7 +45,7 @@ export async function generateDocument(projectId: string | null, templateId: str
 
     if (!templateDef || !templateDef.templateFile) {
         console.error(`TemplateDefinitionNotFound: ID=${templateId}`);
-        throw new Error('Template file not configured.');
+        return { success: false, error: 'Template file not configured.' };
     }
 
     // 3. Prepare Data for Template
@@ -98,7 +98,7 @@ export async function generateDocument(projectId: string | null, templateId: str
 
     if (!fs.existsSync(templatePath)) {
         console.error(`FileDoesNotExist: ${templatePath}`);
-        throw new Error(`Template file missing at: ${templateDef.templateFile}`);
+        return { success: false, error: `Template file missing at: ${templateDef.templateFile}` };
     }
 
     // 4. Generate DOCX
@@ -188,8 +188,8 @@ export async function generateDocument(projectId: string | null, templateId: str
 
         return { success: true, document: newDoc };
     } catch (error: any) {
-        console.error('Error:', error);
-        throw new Error(`Failed: ${error.message}`);
+        console.error('Error generating document:', error);
+        return { success: false, error: `Falha: ${error?.message || String(error)}` };
     }
 }
 
