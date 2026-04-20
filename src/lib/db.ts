@@ -53,6 +53,8 @@ export type GeneratedDocument = {
     templateName: string;
     data: Record<string, any>; // Snapshot of form data
     fileUrl?: string; // Simulated file path
+    fileData?: string; // Base64 string for Vercel
+    fileName?: string; // Real filename
     createdAt: string;
     version: number;
     createdBy: string; // 'User' for now
@@ -83,23 +85,40 @@ const INITIAL_DATA: Schema = {
     generatedDocuments: []
 };
 
+const TMP_DB_PATH = path.join('/tmp', 'data.json');
+
 class Database {
     private async read(): Promise<Schema> {
         try {
-            const data = await fs.readFile(DB_PATH, 'utf-8');
+            let data: string;
+            try {
+                // Try from /tmp first (Vercel modified state)
+                data = await fs.readFile(TMP_DB_PATH, 'utf-8');
+            } catch {
+                // Fall back to the bundled one
+                data = await fs.readFile(DB_PATH, 'utf-8');
+            }
             const parsed = JSON.parse(data);
             // Migration for old files without generatedDocuments
             if (!parsed.generatedDocuments) parsed.generatedDocuments = [];
             return parsed;
         } catch (error) {
-            // If file doesn't exist, create it
-            await this.write(INITIAL_DATA);
+            // If even fallback fails, use initial data
             return INITIAL_DATA;
         }
     }
 
     private async write(data: Schema): Promise<void> {
-        await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2));
+        try {
+            await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2));
+        } catch (error: any) {
+            if (error.code === 'EROFS' || error.message.includes('EROFS') || error.message.includes('read-only')) {
+                // If read-only fs (like Vercel), save to /tmp
+                await fs.writeFile(TMP_DB_PATH, JSON.stringify(data, null, 2));
+            } else {
+                console.error("Failed to write db:", error);
+            }
+        }
     }
 
     // Companies

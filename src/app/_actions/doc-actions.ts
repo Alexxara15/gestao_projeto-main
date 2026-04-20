@@ -147,98 +147,25 @@ export async function generateDocument(projectId: string | null, templateId: str
 
         // Check if it is Equatorial Solicitação
         if (templateId.includes('equatorial-solicitacao')) {
-            // FIXED FILENAME RULE: NT.00016.EQTL-03-ANEXO-III-NT.016.EQTL-Termo-de-Solicitacao-de-Compartilhamento.docx
-            // "Sempre sobrescrever apenas o arquivo gerado da versão" -> This implies the filename is constant.
-            // However, if we overwrite the file on disk, we lose history if we point to the same file.
-            // But the requirement says "histórico interno por versão".
-            // If we generate v1, v2, v3... and they all have the SAME filename, we can't store them all in the same folder with the same name.
-            // UNLESS we store them with unique names internally, but serve them (or name them in download) as the fixed name?
-            // OR, better, we append version to the filename?
-            // Requirement: "O arquivo gerado deve sempre sair com o nome exatamente igual... sem variáveis... sem data"
-            // AND "Sempre sobrescrever apenas o arquivo gerado da versão".
-            // Interpretation: The file saved in the OS might need to be unique to be retrieved, BUT the user probably downloads it?
-            // Or maybe they just want the latest one to be THE file?
-            // "mantendo histórico interno por versão" -> The DB has a list of versions.
-            // If I overwrite `file.docx`, checking v1 will open v3.
-            // To solve this: I will name the file uniquely on DISK (e.g. hash or GUID), but existing logic exposes `fileUrl`.
-            // The prompt might mean the *downloaded* name?
-            // No, "Nome do arquivo final (FIXO)".
-            // Let's assume for now I will use the fixed name. If v2 comes, it overwrites v1 if in same folder.
-            // I will append a short hash to the DISK filename to preserve history, but maybe that violates the rule?
-            // "Não incluir data... Sobrescrever apenas o arquivo gerado da versão".
-            // This sounds like they want the file to be `...Compartilhamento.docx` ALWAYS.
-            // If I do that, v1 is lost.
-            // Compromise: I will name it `NT...Compartilhamento.docx`. The previous version will be overwritten on disk.
-            // If the user wants history, they can see the metadata in DB, but the file content is lost if overwritten.
-            // WAIT: "mantendo histórico interno por versão". If the DB says "v1", and I click it, and it opens the NEW content, the history is fake.
-            // I will use a GUID for the disk file, but the `fileKey`?
-            // Actually, the simplest approach that satisfies "Fixed Name" usually refers to what the user sees/downloads.
-            // But here I am saving to `public/generated-docs`.
-            // I will ignore the risk of overwriting history for now as per "Sempre sobrescrever", OR
-            // I will assume the requirement means "The resulting file displayed/sent".
-            // Let's implement EXACTLY what is asked: Fixed Name.
-
             fileName = 'NT.00016.EQTL-03-ANEXO-III-NT.016.EQTL-Termo-de-Solicitacao-de-Compartilhamento.docx';
         } else if (templateId.includes('equatorial-procuracao')) {
-            // Rule: Procuracao_Equatorial_{UF}.docx
-            // Requirement: "Não sobrescrever versões anteriores" -> So we append version/date to filename on disk.
             const uf = preparedData['estado_uf'] || 'UF';
-            // Sanitize UF just in case
             const safeUf = uf.replace(/[^a-zA-Z]/g, '').toUpperCase();
-
-            // We use underscores to separate version to keep it clean
             fileName = `Procuracao_Equatorial_${safeUf}_v${version}.docx`;
         } else if (templateId.includes('enel-ce-solicitacao')) {
-            // Requested format: Solicitação_de_Compartilhamento
             fileName = 'Solicitação_de_Compartilhamento.docx';
         } else {
-            // Standard Naming fallback
             const companyName = formData['empresa_razao_social'] || formData['nome_razao_social'] || 'AVULSO';
             const safeCompanyName = companyName.replace(/[^a-zA-Z0-9]/g, '').toUpperCase().substring(0, 15);
             const dateStr = new Date().toISOString().split('T')[0].replace(/-/g, '');
             fileName = `Doc_${safeCompanyName}_v${version}_${dateStr}.docx`;
         }
 
-        // Ensure directory exists
-        const outputDir = path.resolve(process.cwd(), 'public/generated-docs');
-        if (!fs.existsSync(outputDir)) {
-            fs.mkdirSync(outputDir, { recursive: true });
-        }
-
-        // If unique versioning is required on disk but fixed name desired, implies logic separation.
-        // But for this task, I will just write the file.
-        // However, if I write to fixed name, v1 is overwritten by v2.
-        // User said: "sobrescrever apenas o arquivo gerado da versão".
-        // This implies: "Only the file for THIS version".
-        // Maybe they want: `File_v1.docx`, `File_v2.docx`?
-        // "Não incluir nome de empresa... Não incluir data... Não incluir UF"
-        // "O arquivo gerado deve sempre sair com o nome exatamente igual"
-        // Okay, I will use the fixed name. To prevent total data loss of previous versions in a multi-user or multi-version scenario,
-        // I will actually prepend the ID to the filename on DISK, but that violates "Fixed Name".
-        // Unless... the user downloads it? The system serves static files.
-        // I will stick to the requested fixed name. If it overwrites, it overwrites.
-        // Wait, if 2 users generate for different companies?
-        // "Não incluir nome de empresa".
-        // Then user A overwrites user B's file.
-        // This is a terrible requirement for a shared system.
-        // I'll assume this "Setup" is for a single user/session focus or they accept this collision.
-        // I will assign unique filenames internally if I can, but the prompt is strict.
-        // "Nome do arquivo final (FIXO)".
-        // I'll do this: filename = `NT...docx`.
-        // To avoid conflict, I'll put it in a folder named after the ID? No, public folder.
-        // I'll trust the user wants this exact name.
-
-        // RE-READING: "Sempre sobrescrever apenas o arquivo gerado da versão".
-        // This might mean: "generated file OF THE version".
-        // Paradox: "Fixed name" vs "Version history".
-        // I'll implement the Fixed Name. The URL will point to it.
-
-        const outputPath = path.join(outputDir, fileName);
-        fs.writeFileSync(outputPath, buf);
+        const docId = crypto.randomUUID();
 
         // 6. Persist to DB
         const newDoc: GeneratedDocument = {
-            id: crypto.randomUUID(),
+            id: docId,
             projectId,
             templateId,
             templateName,
@@ -246,7 +173,9 @@ export async function generateDocument(projectId: string | null, templateId: str
             createdAt: new Date().toISOString(),
             version: version,
             createdBy: 'Usuário Demo',
-            fileUrl: `/generated-docs/${fileName}`,
+            fileUrl: `/api/download/${docId}`,
+            fileName: fileName,
+            fileData: buf.toString('base64'),
             context: projectId ? 'PROJECT' : 'STANDALONE'
         };
 
