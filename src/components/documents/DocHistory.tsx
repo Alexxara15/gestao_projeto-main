@@ -89,7 +89,38 @@ export function DocHistory({ documents, projects = [], companies = [], onEdit }:
                                         </div>
                                     </div>
                                     <div className="flex space-x-2 pt-1">
-                                        <Button variant="outline" size="xs" className="h-7 text-xs w-full" onClick={() => alert('Download simulado: ' + doc.fileUrl)}>
+                                        <Button 
+                                            variant="outline" 
+                                            size="xs" 
+                                            className="h-7 text-xs w-full" 
+                                            onClick={() => {
+                                                if (doc.fileData) {
+                                                    try {
+                                                        const binaryString = window.atob(doc.fileData);
+                                                        const len = binaryString.length;
+                                                        const bytes = new Uint8Array(len);
+                                                        for (let i = 0; i < len; i++) {
+                                                            bytes[i] = binaryString.charCodeAt(i);
+                                                        }
+                                                        const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+                                                        const downloadUrl = URL.createObjectURL(blob);
+                                                        
+                                                        const link = document.createElement('a');
+                                                        link.href = downloadUrl;
+                                                        link.download = doc.fileName || 'documento.docx';
+                                                        document.body.appendChild(link);
+                                                        link.click();
+                                                        document.body.removeChild(link);
+                                                        URL.revokeObjectURL(downloadUrl);
+                                                        return;
+                                                    } catch (e) {
+                                                        console.error('Error creating local blob from base64:', e);
+                                                    }
+                                                }
+                                                // Fallback if no fileData
+                                                window.open(doc.fileUrl, '_blank');
+                                            }}
+                                        >
                                             <Download className="h-3 w-3 mr-1" /> Baixar
                                         </Button>
                                         {onEdit && (

@@ -106,13 +106,37 @@ export function DocForm({ template, project, company, initialData, onCancel, onS
             }
 
             // Auto-download
-            if (result && result.document && result.document.fileUrl) {
-                const link = document.createElement('a');
-                link.href = result.document.fileUrl;
-                link.download = result.document.fileUrl.split('/').pop() || 'documento.docx';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+            if (result && result.document) {
+                let downloadUrl = result.document.fileUrl || '';
+
+                if (result.document.fileData) {
+                    try {
+                        const binaryString = window.atob(result.document.fileData);
+                        const len = binaryString.length;
+                        const bytes = new Uint8Array(len);
+                        for (let i = 0; i < len; i++) {
+                            bytes[i] = binaryString.charCodeAt(i);
+                        }
+                        const blob = new Blob([bytes], { type: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document' });
+                        downloadUrl = URL.createObjectURL(blob);
+                    } catch (e) {
+                        console.error('Error creating local blob from base64:', e);
+                    }
+                }
+
+                if (downloadUrl) {
+                    const link = document.createElement('a');
+                    link.href = downloadUrl;
+                    link.download = result.document.fileName || 'documento.docx';
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+                    // Clean up blob URL if created
+                    if (downloadUrl.startsWith('blob:')) {
+                        URL.revokeObjectURL(downloadUrl);
+                    }
+                }
             }
 
             onSuccess();
