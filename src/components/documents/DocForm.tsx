@@ -132,9 +132,11 @@ export function DocForm({ template, project, company, initialData, onCancel, onS
                     link.click();
                     document.body.removeChild(link);
 
-                    // Clean up blob URL if created
+                    // Clean up blob URL if created after waiting for browser to start download
                     if (downloadUrl.startsWith('blob:')) {
-                        URL.revokeObjectURL(downloadUrl);
+                        setTimeout(() => {
+                            URL.revokeObjectURL(downloadUrl);
+                        }, 1000);
                     }
                 }
             }

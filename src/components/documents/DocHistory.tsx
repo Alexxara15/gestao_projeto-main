@@ -111,7 +111,9 @@ export function DocHistory({ documents, projects = [], companies = [], onEdit }:
                                                         document.body.appendChild(link);
                                                         link.click();
                                                         document.body.removeChild(link);
-                                                        URL.revokeObjectURL(downloadUrl);
+                                                        setTimeout(() => {
+                                                            URL.revokeObjectURL(downloadUrl);
+                                                        }, 1000);
                                                         return;
                                                     } catch (e) {
                                                         console.error('Error creating local blob from base64:', e);
