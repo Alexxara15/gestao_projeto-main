@@ -1,10 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  experimental: {
-    outputFileTracingIncludes: {
-      "/**": ["./public/templates/**/*"]
-    },
+  outputFileTracingIncludes: {
+    "/**": ["./public/templates/**/*"]
   },
   webpack: (config, { dev }) => {
     if (dev) {
