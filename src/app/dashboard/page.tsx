@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FolderOpen, AlertCircle, CheckCircle, Clock } from "lucide-react";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 export default async function DashboardPage() {
     const projects = await db.getProjects();
     // Sort logic handled in db or here. Array.sort mutates, so slice first ? No need if single use.

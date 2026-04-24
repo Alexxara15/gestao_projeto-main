@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { KanbanBoard } from "@/components/kanban/KanbanBoard";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProjetosPage() {
     // Include company and concessionaire to display names
     const rawProjects = await db.getProjects();

@@ -5,6 +5,8 @@ import { Plus } from "lucide-react";
 import Link from "next/link";
 import { db } from "@/lib/db";
 
+export const dynamic = 'force-dynamic';
+
 export default async function EmpresasPage() {
     const companies = await db.getCompanies();
 
