@@ -78,6 +78,16 @@
       "techResp": "JULIANA DE MEDEIROS ABREU MARINHO",
       "email": "inforlinkreriutaba@gmail.com",
       "phone": "88 9968-9851"
+    },
+    {
+      "id": "test-id",
+      "name": "Test Company",
+      "razaoSocial": "Test Company LTDA",
+      "cnpj": "00000000000000",
+      "address": "Test Address",
+      "techResp": "Test Resp",
+      "email": "test@example.com",
+      "phone": "00000000000"
     }
   ],
   "states": [

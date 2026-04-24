@@ -110,13 +110,23 @@ class Database {
 
     private async write(data: Schema): Promise<void> {
         try {
-            await fs.writeFile(DB_PATH, JSON.stringify(data, null, 2));
+            const tmpPath = DB_PATH + '.tmp';
+            await fs.writeFile(tmpPath, JSON.stringify(data, null, 2));
+            // Force rename to avoid EBUSY on Windows if locked
+            try {
+                await fs.rename(tmpPath, DB_PATH);
+            } catch (renameErr: any) {
+                // If rename fails across devices or due to severe locks, fallback to copy/unlink
+                await fs.copyFile(tmpPath, DB_PATH);
+                await fs.unlink(tmpPath).catch(() => {});
+            }
         } catch (error: any) {
             if (error.code === 'EROFS' || error.message.includes('EROFS') || error.message.includes('read-only')) {
                 // If read-only fs (like Vercel), save to /tmp
                 await fs.writeFile(TMP_DB_PATH, JSON.stringify(data, null, 2));
             } else {
                 console.error("Failed to write db:", error);
+                throw error;
             }
         }
     }

@@ -31,7 +31,8 @@ export async function createCompany(prevState: any, formData: FormData) {
     const result = formSchema.safeParse(rawData);
 
     if (!result.success) {
-        return { message: 'Dados inválidos. Verifique os campos.' };
+        const errorMessages = result.error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
+        return { message: `Dados inválidos: ${errorMessages}` };
     }
 
     const newCompany: Company = {
