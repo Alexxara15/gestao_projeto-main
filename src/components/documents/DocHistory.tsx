@@ -120,7 +120,7 @@ export function DocHistory({ documents, projects = [], companies = [], onEdit }:
                                                     }
                                                 }
                                                 // Fallback if no fileData
-                                                window.open(doc.fileUrl, '_blank');
+                                                window.open(doc.fileUrl || undefined, '_blank');
                                             }}
                                         >
                                             <Download className="h-3 w-3 mr-1" /> Baixar

@@ -31,7 +31,7 @@ export async function createCompany(prevState: any, formData: FormData) {
     const result = formSchema.safeParse(rawData);
 
     if (!result.success) {
-        const errorMessages = result.error.errors.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
+        const errorMessages = result.error.issues.map(e => `${e.path.join('.')}: ${e.message}`).join(', ');
         return { message: `Dados inválidos: ${errorMessages}` };
     }
 
