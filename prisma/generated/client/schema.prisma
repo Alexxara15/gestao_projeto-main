@@ -32,7 +32,7 @@ model Concessionaire {
   name         String
   stateId      String
   state        State     @relation(fields: [stateId], references: [id])
-  requiredDocs String[]  // Array of strings (supported in Postgres)
+  requiredDocs String[] // Array of strings (supported in Postgres)
   projects     Project[]
 }
 
