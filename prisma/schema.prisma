@@ -1,0 +1,72 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Company {
+  id          String    @id @default(uuid())
+  name        String
+  razaoSocial String?
+  cnpj        String
+  address     String
+  techResp    String
+  email       String
+  phone       String
+  projects    Project[]
+}
+
+model State {
+  id              String           @id @default(uuid())
+  name            String
+  uf              String
+  concessionaires Concessionaire[]
+  projects        Project[]
+}
+
+model Concessionaire {
+  id           String    @id @default(uuid())
+  name         String
+  stateId      String
+  state        State     @relation(fields: [stateId], references: [id])
+  requiredDocs String[]  // Array of strings (supported in Postgres)
+  projects     Project[]
+}
+
+model Project {
+  id               String              @id @default(uuid())
+  number           String
+  companyId        String
+  company          Company             @relation(fields: [companyId], references: [id])
+  stateId          String
+  state            State               @relation(fields: [stateId], references: [id])
+  concessionaireId String
+  concessionaire   Concessionaire      @relation(fields: [concessionaireId], references: [id])
+  city             String
+  infraType        String
+  poleCount        Int
+  status           String // "PREPARATION", "SENT", "SIGNED"
+  createdAt        DateTime            @default(now())
+  documents        Json // To store array of { id, name, required, completed }
+  generatedDocs    GeneratedDocument[]
+}
+
+model GeneratedDocument {
+  id           String   @id @default(uuid())
+  projectId    String?
+  project      Project? @relation(fields: [projectId], references: [id])
+  templateId   String
+  templateName String
+  data         Json // To store form data snapshot
+  fileUrl      String?
+  fileData     String?
+  fileName     String?
+  createdAt    DateTime @default(now())
+  version      Int
+  createdBy    String
+  context      String? // "PROJECT" | "STANDALONE"
+}

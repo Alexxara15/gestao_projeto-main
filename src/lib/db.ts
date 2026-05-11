@@ -1,12 +1,15 @@
-import fs from 'fs/promises';
-import path from 'path';
+import { PrismaClient } from '@prisma/client';
 
-const DB_PATH = path.join(process.cwd(), 'data.json');
+const globalForPrisma = global as unknown as { prisma: PrismaClient };
+
+export const prisma = globalForPrisma.prisma || new PrismaClient();
+
+if (process.env.NODE_ENV !== 'production') globalForPrisma.prisma = prisma;
 
 export type Company = {
     id: string;
     name: string; // Used as Nome Fantasia
-    razaoSocial?: string; // Razão Social
+    razaoSocial?: string | null; // Razão Social
     cnpj: string;
     address: string;
     techResp: string;
@@ -52,164 +55,204 @@ export type GeneratedDocument = {
     templateId: string;
     templateName: string;
     data: Record<string, any>; // Snapshot of form data
-    fileUrl?: string; // Simulated file path
-    fileData?: string; // Base64 string for Vercel
-    fileName?: string; // Real filename
+    fileUrl?: string | null; // Simulated file path
+    fileData?: string | null; // Base64 string for Vercel
+    fileName?: string | null; // Real filename
     createdAt: string;
     version: number;
     createdBy: string; // 'User' for now
-    context?: 'PROJECT' | 'STANDALONE';
+    context?: 'PROJECT' | 'STANDALONE' | null;
 };
-
-type Schema = {
-    companies: Company[];
-    states: State[];
-    concessionaires: Concessionaire[];
-    projects: Project[];
-    generatedDocuments: GeneratedDocument[];
-};
-
-const INITIAL_DATA: Schema = {
-    companies: [],
-    states: [
-        { id: '1', name: 'São Paulo', uf: 'SP' },
-        { id: '2', name: 'Rio de Janeiro', uf: 'RJ' },
-        { id: '3', name: 'Ceará', uf: 'CE' },
-    ],
-    concessionaires: [
-        { id: '1', name: 'Enel SP', stateId: '1', requiredDocs: ['Requerimento', 'Projeto Técnico'] },
-        { id: '2', name: 'Light', stateId: '2', requiredDocs: ['Solicitação de Acesso'] },
-        { id: '3', name: 'Enel CE', stateId: '3', requiredDocs: ['Solicitação de Compartilhamento'] },
-    ],
-    projects: [],
-    generatedDocuments: []
-};
-
-const TMP_DB_PATH = path.join('/tmp', 'data.json');
 
 class Database {
-    private async read(): Promise<Schema> {
-        try {
-            let data: string;
-            try {
-                // Try from /tmp first (Vercel modified state)
-                data = await fs.readFile(TMP_DB_PATH, 'utf-8');
-            } catch {
-                // Fall back to the bundled one
-                data = await fs.readFile(DB_PATH, 'utf-8');
-            }
-            const parsed = JSON.parse(data);
-            // Migration for old files without generatedDocuments
-            if (!parsed.generatedDocuments) parsed.generatedDocuments = [];
-            return parsed;
-        } catch (error) {
-            // If even fallback fails, use initial data
-            return INITIAL_DATA;
-        }
-    }
-
-    private async write(data: Schema): Promise<void> {
-        try {
-            const tmpPath = DB_PATH + '.tmp';
-            await fs.writeFile(tmpPath, JSON.stringify(data, null, 2));
-            // Force rename to avoid EBUSY on Windows if locked
-            try {
-                await fs.rename(tmpPath, DB_PATH);
-            } catch (renameErr: any) {
-                // If rename fails across devices or due to severe locks, fallback to copy/unlink
-                await fs.copyFile(tmpPath, DB_PATH);
-                await fs.unlink(tmpPath).catch(() => {});
-            }
-        } catch (error: any) {
-            if (error.code === 'EROFS' || error.message.includes('EROFS') || error.message.includes('read-only')) {
-                // If read-only fs (like Vercel), save to /tmp
-                await fs.writeFile(TMP_DB_PATH, JSON.stringify(data, null, 2));
-            } else {
-                console.error("Failed to write db:", error);
-                throw error;
-            }
-        }
-    }
-
     // Companies
-    async getCompanies() { return (await this.read()).companies; }
+    async getCompanies() { 
+        return prisma.company.findMany(); 
+    }
+    
     async addCompany(company: Company) {
-        const data = await this.read();
-        data.companies.push(company);
-        await this.write(data);
-        return company;
+        return prisma.company.create({
+            data: {
+                id: company.id,
+                name: company.name,
+                razaoSocial: company.razaoSocial,
+                cnpj: company.cnpj,
+                address: company.address,
+                techResp: company.techResp,
+                email: company.email,
+                phone: company.phone,
+            }
+        });
     }
 
     // States
-    async getStates() { return (await this.read()).states; }
+    async getStates() { 
+        return prisma.state.findMany(); 
+    }
+    
     async addState(state: State) {
-        const data = await this.read();
-        data.states.push(state);
-        await this.write(data);
-        return state;
+        return prisma.state.create({
+            data: {
+                id: state.id,
+                name: state.name,
+                uf: state.uf,
+            }
+        });
     }
 
     // Concessionaires
-    async getConcessionaires() { return (await this.read()).concessionaires; }
-    async addConcessionaire(concessionaire: Concessionaire) {
-        const data = await this.read();
-        data.concessionaires.push(concessionaire);
-        await this.write(data);
-        return concessionaire;
+    async getConcessionaires() { 
+        return prisma.concessionaire.findMany(); 
     }
+    
+    async addConcessionaire(concessionaire: Concessionaire) {
+        return prisma.concessionaire.create({
+            data: {
+                id: concessionaire.id,
+                name: concessionaire.name,
+                stateId: concessionaire.stateId,
+                requiredDocs: concessionaire.requiredDocs,
+            }
+        });
+    }
+    
     async updateConcessionaire(id: string, updates: Partial<Concessionaire>) {
-        const data = await this.read();
-        data.concessionaires = data.concessionaires.map(c => c.id === id ? { ...c, ...updates } : c);
-        await this.write(data);
+        return prisma.concessionaire.update({
+            where: { id },
+            data: {
+                name: updates.name,
+                stateId: updates.stateId,
+                requiredDocs: updates.requiredDocs,
+            }
+        });
     }
 
     // Projects
-    async getProjects() { return (await this.read()).projects; }
+    async getProjects() { 
+        const projects = await prisma.project.findMany();
+        return projects.map(p => ({
+            ...p,
+            status: p.status as Project['status'],
+            createdAt: p.createdAt.toISOString(),
+            documents: p.documents as unknown as Project['documents']
+        }));
+    }
+    
     async addProject(project: Project) {
-        const data = await this.read();
-        data.projects.push(project);
-        await this.write(data);
-        return project;
+        const created = await prisma.project.create({
+            data: {
+                id: project.id,
+                number: project.number,
+                companyId: project.companyId,
+                stateId: project.stateId,
+                concessionaireId: project.concessionaireId,
+                city: project.city,
+                infraType: project.infraType,
+                poleCount: project.poleCount,
+                status: project.status,
+                documents: project.documents as any,
+            }
+        });
+        return {
+            ...created,
+            status: created.status as Project['status'],
+            createdAt: created.createdAt.toISOString(),
+            documents: created.documents as unknown as Project['documents']
+        };
     }
+    
     async updateProject(id: string, updates: Partial<Project>) {
-        const data = await this.read();
-        data.projects = data.projects.map(p => p.id === id ? { ...p, ...updates } : p);
-        await this.write(data);
+        await prisma.project.update({
+            where: { id },
+            data: {
+                number: updates.number,
+                companyId: updates.companyId,
+                stateId: updates.stateId,
+                concessionaireId: updates.concessionaireId,
+                city: updates.city,
+                infraType: updates.infraType,
+                poleCount: updates.poleCount,
+                status: updates.status,
+                documents: updates.documents as any,
+            }
+        });
     }
+    
     async updateProjectStatus(id: string, status: Project['status']) {
         return this.updateProject(id, { status });
     }
+    
     async deleteProject(id: string) {
-        const data = await this.read();
-        data.projects = data.projects.filter(p => p.id !== id);
-        if (data.generatedDocuments) {
-            data.generatedDocuments = data.generatedDocuments.filter(d => d.projectId !== id);
-        }
-        await this.write(data);
+        // Must delete generated documents first due to foreign key
+        await prisma.generatedDocument.deleteMany({
+            where: { projectId: id }
+        });
+        await prisma.project.delete({
+            where: { id }
+        });
     }
 
     // Generated Documents
     async getAllGeneratedDocuments() {
-        const data = await this.read();
-        return (data.generatedDocuments || []).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        const docs = await prisma.generatedDocument.findMany({
+            orderBy: { createdAt: 'desc' }
+        });
+        return docs.map(d => ({
+            ...d,
+            createdAt: d.createdAt.toISOString(),
+            data: d.data as Record<string, any>,
+            context: d.context as GeneratedDocument['context']
+        }));
     }
 
     async getGeneratedDocuments(projectId: string) {
-        const data = await this.read();
-        return (data.generatedDocuments || []).filter(d => d.projectId === projectId).sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+        const docs = await prisma.generatedDocument.findMany({
+            where: { projectId },
+            orderBy: { createdAt: 'desc' }
+        });
+        return docs.map(d => ({
+            ...d,
+            createdAt: d.createdAt.toISOString(),
+            data: d.data as Record<string, any>,
+            context: d.context as GeneratedDocument['context']
+        }));
     }
 
     async addGeneratedDocument(doc: GeneratedDocument) {
-        const data = await this.read();
-        if (!data.generatedDocuments) data.generatedDocuments = [];
-        data.generatedDocuments.push(doc);
-        await this.write(data);
-        return doc;
+        const created = await prisma.generatedDocument.create({
+            data: {
+                id: doc.id,
+                projectId: doc.projectId,
+                templateId: doc.templateId,
+                templateName: doc.templateName,
+                data: doc.data as any,
+                fileUrl: doc.fileUrl,
+                fileData: doc.fileData,
+                fileName: doc.fileName,
+                version: doc.version,
+                createdBy: doc.createdBy,
+                context: doc.context,
+            }
+        });
+        return {
+            ...created,
+            createdAt: created.createdAt.toISOString(),
+            data: created.data as Record<string, any>,
+            context: created.context as GeneratedDocument['context']
+        };
     }
 
     async getDocumentById(id: string) {
-        const data = await this.read();
-        return (data.generatedDocuments || []).find(d => d.id === id);
+        const d = await prisma.generatedDocument.findUnique({
+            where: { id }
+        });
+        if (!d) return undefined;
+        return {
+            ...d,
+            createdAt: d.createdAt.toISOString(),
+            data: d.data as Record<string, any>,
+            context: d.context as GeneratedDocument['context']
+        };
     }
 }
 
